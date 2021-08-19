@@ -38,7 +38,11 @@ app.get('/users/:id', function (req, res) {
 })
 
 //*  POST ////////////////
-// Escribamos una función para manejar una solicitud POST realizada al punto final de 'inicio de sesión', como si un usuario intentara iniciar sesión:
+// Observe cómo usamos app.post esta vez en lugar de app.get.También comparamos los valores pasados​​ desde el cuerpo de la solicitud para ver si coinciden con nuestros datos simulados(que normalmente provienen de una base de datos).Si coinciden, enviará un archivo JSON con un valor adicional, donde se podría almacenar un token.Sin embargo, si no coinciden, devolverá un mensaje de error(sin el token).
+
+// Escribamos una función para manejar una solicitud POST realizada al punto final de 'inicio de sesión', como si un usuario intentara iniciar sesión
+
+// Como medida de seguridad, nunca debe guardar las contraseñas directamente en su base de datos. Utilice una herramienta como bcrypt para guardar una versión hash, que se decodificará al iniciar sesión.
 app.post('/login', function (req, res) {
   // Typically passwords are encrypted using something like bcrypt before sending to database
   const username = req.body.username;
@@ -61,8 +65,6 @@ app.post('/login', function (req, res) {
     })
   }
 })
-
-
 
 
 app.listen(8000, function () {
